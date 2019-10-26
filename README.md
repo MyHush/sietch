@@ -38,7 +38,10 @@ making transactions.
 
 From the perspective of the average GUI wallet user, It Just Works.
 There are no additional mandatory steps for the user when sending
-each transaction. There will be some options for advanced users, to
+each transaction. No mandatory wallet maintenance will be needed
+to keep their privacy.
+
+There will be some options for advanced users, to
 tweak the settings, but using them is not required for increased privacy.
 They will mostly serve as ways for developers to experiment and optimize
 things.
@@ -46,8 +49,8 @@ things.
 ## What are the goals of Byrsa?
 
  * Make linkability analysis of zaddrs drastically more expensive
- * Allow people to make zaddr xtns safely/privately without thinking about
-   metadata leakage or advanced techniques
+ * Allow people to make zaddr xtns safely/privately while thinking about
+   metadata leakage or advanced techniques much less
  * Prevent average users from making some blockchain operations which give out too much metadata
  * Break some assumptions which many blockchain analyst software uses
  * Require blockchain analysts to write new software
@@ -65,6 +68,8 @@ transactions can still send to over 1000 recipients even with Byrsa protections,
 doesn't actually effect any current users, as far as we know.
 
 How much longer will average xtn take?
+
+Potentially more txfees if the transaction becomes so large to require more than the default fee.
 
 No increased RAM usage, as creating JoinSplits is a serial process, but shielded transactions
 will take longer in CPU seconds, since there will be more recipients by default.
