@@ -1,6 +1,18 @@
 # Byrsa 
 
-A walled citadel on a hill for your shielded funds.
+A walled citadel on a hill for your shielded funds, made from tiny bits of shielded
+dust or "zdust", like the bits of oxhide that Dido used in founding the citadel
+of Carthage:
+
+```
+		In Virgil's account of Dido's founding of Carthage,
+		when Dido and her party were encamped at Byrsa,
+		the local Berber chieftain offered them as much land
+		as could be covered with a single oxhide.
+		Therefore, Dido cut an oxhide into tiny strips and set
+		them on the ground end to end until she had completely
+		encircled the hilltop of Byrsa (Greek: βύρσα, "oxhide"). 
+```
 
 ## What is Byrsa?
 
@@ -10,9 +22,15 @@ Zcash Protocol, but sit on top of it. It defines certain wallet
 and transction conditions that must be upheld for transactions
 to be accepted by the network.
 
+Any Zcash Protocol coin could adopt this "upgrade" to plain Zcash Protocol,
+though it should be noted that Hush was the first pure Sapling Zcash Protocol
+coin and so our implementation ignores Sprout JoinSplits, since we thankfully
+have none on our v3 mainnet. Supporting Sprout would not be complex and is
+left as an exercise to the interested privacy coin.
+
 ## How is Byrsa implemented?
 
-Mostly it's done directly in C++ the hushd full node, which means
+Byrsa is written in C++ the hushd full node, which means
 all GUI wallets can benefit from it. Some features are implemented
 at the GUI wallet level. The goal is that the user does not need
 to think or do anything different, to have more privacy when
@@ -34,7 +52,7 @@ things.
  * Break some assumptions which many blockchain analyst software uses
  * Require blockchain analysts to write new software
  * Increase the privacy of all funds in the shielded pool
- * Introduce non-determinism to prevent ITM/Metaverse style metadata attacks
+ * Introduce non-determinism to counter ITM/Metaverse style metadata attacks
 
 ## What are the limitations/downsides of Byrsa?
 
@@ -47,8 +65,9 @@ transactions can still send to over 1000 recipients even with Byrsa protections,
 doesn't actually effect any current users, as far as we know.
 
 How much longer will average xtn take?
-More RAM? No!
 
+No increased RAM usage, as creating JoinSplits is a serial process, but shielded transactions
+will take longer in CPU seconds, since there will be more recipients by default.
 
 ## Implementation Details
 
@@ -59,5 +78,4 @@ These RPCs are modified:
 	z_shieldcoinbase
 	z_mergetoaddress
 ```
-
 
