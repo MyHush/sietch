@@ -95,5 +95,42 @@ These RPCs interact with zaddr xtns and may report different or additional info 
 	listunspent
 ```
 
-### z\_sendmany
+### z\_sendmany Rule of Seven
+
+Our goal is to be non-deterministic while also inserting enough zouts such that we have at least N=7 zouts.
+
+Since the normal case is to have 2 zouts (one recipient for a z2z and one change zout back to sending address),
+the normal case will be to add 5 zouts to a normal z2z xtn.
+
+For a z=>t, we must add ....
+For a t=>z we must add 6.
+
+The reason N=7 is chosen is because of the simple fact that `6!=720` while `7!=5040`. This parameter is chosen
+in response to the ITM attack, which relies on a small number of zouts and doing combinatorial algorithms on all
+possibilities. These combinatorial algorithms increase in state space for each link in a long chain of transactions.
+Traditionally each xtn only has a few zouts and so because `2!=2` and `3!=6`, the combinatorial explosion does not
+have a chance to slow down the ITM attack.
+
+Now, consider 5040 choices at each link in a chain, and say we are studying a chain of length L=10.
+Compared to pre-Sietch, we would have `2^10=1024` possibilities versus
+
+```
+5040^10 = 10575608481180064985917685760000000000
+````
+
+possibilities. Even for short chains of xtns, the combinatorial explosion of possibility renders the ITM attack
+extremely expensive. It limits it to searching for linkability metadata in only short chains with lots of
+additional supporting metadata, effectively raising the bar for attack and removing many potential attackers
+who do not have sufficient resources. In pre-Sietch code, the ITM attack can potentially research very long chains,
+dozens, hundreds and perhaps thousands of transactions in length, with commodity hardware.
+Sietch exponenentially increases the cost of doing this, in RAM, CPU and running-time. 
+
+
+### Non-determinism
+
+
+Combinatorial explosion can only protect us so much. It is only one layer of defense. 
+
+When adding zutxos, to break the ITM/Metaverse metadata attacks at a deep level, we much break a deep assumption
+that is baked deep into Bitcoin: determinism.
 
