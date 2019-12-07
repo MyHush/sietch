@@ -141,12 +141,28 @@ need botnet or supercomputer-level resources to attack the same length chains as
 de-anonymizing attackers will focus on studying short linkability chains with a lot of additional metadata from
 timing analysis, amount analysis and potentially passive or active dust attacks.
 
+## Non-determinism
 
-### Non-determinism
-
-
-Combinatorial explosion can only protect us so much. It is only one layer of defense. 
+Combinatorial explosion can only protect us so much. It is only one layer of defense and surely will not save us
+from the inevitable quantum computers which are being optimized every day.
 
 When adding zutxos, to break the ITM/Metaverse metadata attacks at a deep level, we must break a deep assumption
-that is baked deep into Bitcoin: determinism.
+that is baked deep into Bitcoin wallet behavior: determinism.
+
+Given the exact same wallet.dat, Bitcoin, Zcash and Hush will act in *exactly the same way* when sending a transaction, every
+single time. Given all input data, one can predict the behavior of what will happen. Obviously, this is a very good idea in Bitcoin,
+for total supply and issuance accountability. But this also contributes to Bitcoin being a "surveillance coin", that perfectly
+preserves metadata until the end of time.
+
+Zcash had no reason to change this and they did not, and so this behavior is baked in deep to all Bitcoin and Zcash forks.
+In light of the ITM/Metaverse attack, this determinism is considered dangerous by the author. The reason is that the
+ITM/Metaverse attack utilizes the fact that wallet operations are predictable to extract more metadata than previously thought possible from z2z and t=>z xtns. The only way to prevent that is to break the assumption of predictable wallet behavior.
+
+# Conclusions
+
+Sietch-enabled Hush Protocol can be thought of as using the ideas of combinatorial explosion and non-determinism to thwart brand-new
+blockchain analysis techniques. Non-determinism is the stronger weapon, but it does not add enough privacy unless we add in the appropriate amount of combinatorial explosion to linkability analysis. Together they are a potent weapon which also give us a knob
+to turn to increase future security, i.e. the minimum number of zaddr outputs allowed in a transaction.
+
+This is why both techniques complement each other and have a greater privacy improvement when used together.
 
