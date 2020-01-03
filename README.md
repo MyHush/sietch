@@ -96,6 +96,11 @@ These RPCs are modified directly:
 
 ```
 	z_sendmany
+```
+
+These RPCs are currently not modified, but may be in the future:
+
+```
 	z_shieldcoinbase
 	z_mergetoaddress
 ```
@@ -106,6 +111,12 @@ These RPCs interact with zaddr xtns and may report different or additional info 
 	z_viewtransaction
 	z_listtransactions
 	listunspent
+```
+
+These new RPCs were added in Sietch:
+
+```
+	z_listnullifiers
 ```
 
 ### z\_sendmany Rule of Seven
