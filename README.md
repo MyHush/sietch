@@ -171,7 +171,7 @@ Zcash had no reason to change this and they did not, and so this behavior is bak
 In light of the ITM/Metaverse attack, this determinism is considered dangerous by the author. The reason is that the
 ITM/Metaverse attack utilizes the fact that wallet operations are predictable to extract more metadata than previously thought possible from z2z and t=>z xtns. The only way to prevent that is to break the assumption of predictable wallet behavior.
 
-# Conclusions
+## Conclusions
 
 Sietch-enabled Hush Protocol can be thought of as using the ideas of combinatorial explosion and non-determinism to thwart brand-new
 blockchain analysis techniques. Non-determinism is the stronger weapon, but it does not add enough privacy unless we add in the appropriate amount of combinatorial explosion to linkability analysis. Together they are a potent weapon which also give us a knob
@@ -179,3 +179,6 @@ to turn to increase future security, i.e. the minimum number of zaddr outputs al
 
 This is why both techniques complement each other and have a greater privacy improvement when used together.
 
+## Current Implementations
+
+There are currently 4(!) implementations of Sietch in Hush world, 2 inside of `hushd` internals and 2 for `SilentDragonLite` which uses raw transactions and not the RPC interface of `z_sendmany`. Each of the 2 implmentations has a static (drawing from a fixed pool of Sietch zaddrs) and a dynamic version (dynamically generating Sietch zaddrs at run-time). Currently the static implementations are in production as of `Hush 3.3.0` and `SilentDragonLite 1.1.3` and dynamic versions are mostly complete and undergoing performance testing.
