@@ -126,9 +126,11 @@ Our goal is to be non-deterministic while also inserting enough zouts such that 
 Since the normal case is to have 2 zouts (one recipient for a z2z and one change zout back to sending address),
 the normal case will be to add 5 zouts to a normal z2z xtn.
 
-For a z=>t, we must add ....
-For a t=>z we must add 6.
-
+  * For a z=>t, we must add 7 zouts
+  * For a t=>z we must add 6 zouts
+  * For a t=>(z,z) we must add 5 zouts
+  * For a z=>z we must add 6 zouts
+  
 The reason N=7 is chosen is because of the simple fact that `6!=720` while `7!=5040`. This parameter is chosen
 in response to the ITM attack, which relies on a small number of zouts and doing combinatorial algorithms on all
 possibilities. These combinatorial algorithms increase in state space for each link in a long chain of transactions.
