@@ -14,11 +14,12 @@ ecosystem software at a very low level.
 Sietch defines certain wallet and transction conditions that must be
 upheld for transactions to be accepted by the network as well as making all clients have
 new default behavior that is more privacy-preserving. This involves both
-new wallet behavior that is non-consensus and also new consensus rules.
+new wallet behavior that is non-consensus (currently implemented) and also future consensus rules
+to enforce this new default behavior.
 
 Sietch does not modify anything about Zcash internals such as zk-SNARKs,
 cryptographic primitives or changing any of the deep zero knowledge math involved, such
-as Elliptic Curves parameters or other cryptographic machinery.
+as Elliptic Curves parameters, datatypes or other cryptographic machinery.
 
 Any Zcash Protocol coin could adopt this "upgrade" to Sietch-enabled Hush Protocol,
 though it should be noted that Hush was the first pure Sapling Zcash Protocol
@@ -54,7 +55,7 @@ Hush is dedicated to all future privacy features being defaulted to ON instead
 of asking our users to opt-in to privacy, which we know is a fools errand.
 
 Users will not have to opt-in to Sietch and there will be no way to turn off
-the functionality. Additionally, Sietch will be enabled on mainet as an opt-in feature
+the functionality. Additionally, Sietch will be enabled on mainnet as an opt-in feature
 at first, as a first wave of adoption and for testing. When all Hush users have updated
 to software with Sietch-enabled Hush protocol, a new consensus rule will go into effect
 which will prevent older non-Sietch clients. Additionally, Hush will increase it's
@@ -170,6 +171,25 @@ preserves metadata until the end of time.
 Zcash had no reason to change this and they did not, and so this behavior is baked in deep to all Bitcoin and Zcash forks.
 In light of the ITM/Metaverse attack, this determinism is considered dangerous by the author. The reason is that the
 ITM/Metaverse attack utilizes the fact that wallet operations are predictable to extract more metadata than previously thought possible from z2z and t=>z xtns. The only way to prevent that is to break the assumption of predictable wallet behavior.
+
+## Downsides/Issues/Attacks
+
+Code which uses purely raw transactions and broadcasts them to the network needs to do extra work to support Sietch.
+This is why SDL has it's own implementation of Sietch, and any kind of hardware wallet support that uses raw transactions
+in the future, would need to learn about Sietch.
+
+### Metadata Attacks Against Sietch
+
+Yes, Sietch can be metadata-attacked itself!
+TLDR: Worst case is that an attacker steals wallet.dat files and does an immense amount of work to reduce privacy back to pre-Sietch levels, using the ITM attack.
+
+At first there was a single Sietch implementation of 200 zaddrs that were fixed. If the wallet.dat owning those zaddrs were stolen, that could be used to delete all the Sietch "privacy dust" from the transaction graph, making the job of blockchain analysts and/or ITM attackers much easier. This theoretical attack is what prompted dynamic Sietch addresses and also a better way of generating zaddrs inside SDL: using BIP39 seed-phrases to generate a single zaddr and then delete the seed phrase. This method leaves no wallet.dat on disk to steal and the private key material for the zaddr only existed in memory a short time.
+
+Currently in production are 200 static zaddrs in `hushd` and 10,000 static (BIP39-derived) zaddrs in `SDL`. The dynamic
+Sietch zaddr code for `hushd` is complete and can be viewed here: https://github.com/MyHush/hush3/tree/sietch_dynamic
+It's currently being performance tested as it does some exotic things.
+
+There is no wallet.dat to steal to recover data about Sietch zoutputs for 10,000 of the 10,200 zaddrs currently in the combined Sietch zaddr pool, so this attack is no longer viable. Dynamic Sietch zaddrs will make the entire process much more secure by prevent analysts/attackers from even knowing the zaddrs that could potentially be a Sietch output. These dynamic Sietch zaddrs will be generated at run-time and private keys never even written to disk, nor part of the `hdseed` of any wallet.dat in the case of `SDL`.
 
 ## Conclusions
 
