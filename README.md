@@ -189,7 +189,7 @@ Currently in production are 200 static zaddrs in `hushd` and 10,000 static (BIP3
 Sietch zaddr code for `hushd` is complete and can be viewed here: https://github.com/MyHush/hush3/tree/sietch_dynamic
 It's currently being performance tested as it does some exotic things.
 
-There is no wallet.dat to steal to recover data about Sietch zoutputs for 10,000 of the 10,200 zaddrs currently in the combined Sietch zaddr pool, so this attack is no longer viable. Dynamic Sietch zaddrs will make the entire process much more secure by prevent analysts/attackers from even knowing the zaddrs that could potentially be a Sietch output. These dynamic Sietch zaddrs will be generated at run-time and private keys never even written to disk, nor part of the `hdseed` of any wallet.dat in the case of `SDL`.
+There is no wallet.dat to steal to recover data about Sietch zoutputs for 10,000 of the 10,200 zaddrs currently in the combined Sietch zaddr pool, so this attack is no longer viable. Dynamic Sietch zaddrs will make the entire process much more secure by preventing analysts/attackers from even knowing the zaddrs that could potentially be a Sietch output. These dynamic Sietch zaddrs will be generated at run-time and private keys never even written to disk, nor part of the `hdseed` of any wallet.dat in the case of `SDL`.
 
 ## Conclusions
 
