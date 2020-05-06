@@ -11,7 +11,7 @@ which uses `hush-cli` and/or the RPC interface are not required to change
 in any way. This preserves compatibility with all existing Zcash protocol
 ecosystem software at a very low level.
 
-Sietch defines certain wallet and transction conditions that must be
+Sietch defines certain wallet and transaction conditions that must be
 upheld for transactions to be accepted by the network as well as making all clients have
 new default behavior that is more privacy-preserving. This involves both
 new wallet behavior that is non-consensus and also new consensus rules.
